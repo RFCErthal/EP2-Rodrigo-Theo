@@ -1,4 +1,5 @@
 def define_posicoes(linha, coluna, orientacao, tamanho):
+   
     posicoes = []
     
     while tamanho > 0:
@@ -13,7 +14,9 @@ def define_posicoes(linha, coluna, orientacao, tamanho):
     
     return posicoes 
 
+
 def preenche_frota(frota, nome_navio, linha, coluna, orientacao, tamanho):
+    
     posicoes_navio = define_posicoes(linha, coluna, orientacao, tamanho)
     
     if nome_navio in frota:
@@ -22,3 +25,13 @@ def preenche_frota(frota, nome_navio, linha, coluna, orientacao, tamanho):
         frota[nome_navio] = [posicoes_navio]
     
     return frota
+
+
+def faz_jogada(tabuleiro, linha, coluna):
+   
+    if tabuleiro[linha][coluna] == 1:
+        tabuleiro[linha][coluna] = 'X'  
+    else:
+        tabuleiro[linha][coluna] = '-'  
+    
+    return tabuleiro
