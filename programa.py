@@ -39,14 +39,12 @@ def posicionar_frota(frota):
 
             if posicao_valida(frota, linha, coluna, orientacao, tamanho):
                 posicoes = define_posicoes(linha, coluna, orientacao, tamanho)
-                
                 frota = preenche_frota(frota, nome, linha, coluna, orientacao, tamanho)
                 break
+            
             else:
                 print("Esta posição não está válida!")
-    
     return frota
 
 frota_atualizada = posicionar_frota(frota)
-
 print(frota_atualizada)
