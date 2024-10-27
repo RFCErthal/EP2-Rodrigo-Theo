@@ -93,6 +93,12 @@ for navio, posicoes in frota_oponente.items():
             linha, coluna = coordenada
             tabuleiro_oponente[linha][coluna] = 'N' 
 
+for navio, posicoes in frota.items():
+    for posicao in posicoes:
+        for coordenada in posicao:
+            linha, coluna = coordenada
+            tabuleiro_jogador[linha][coluna] = '1'
+
 jogando = True
 jogadas_realizadas = []
 
