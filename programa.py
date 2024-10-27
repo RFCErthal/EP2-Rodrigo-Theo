@@ -1,6 +1,7 @@
 from funcoes import posicao_valida, define_posicoes, preenche_frota, afundados, faz_jogada
+import random
 
-frota = {
+frota = { 
     "porta-aviões": [],
     "navio-tanque": [],
     "contratorpedeiro": [],
@@ -47,9 +48,6 @@ def posicionar_frota(frota):
     return frota
 
 frota_atualizada = posicionar_frota(frota)
-# print(frota_atualizada)
-
-# pergunta 8
 
 def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
     texto = ''
@@ -62,7 +60,7 @@ def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
         texto += f'{linha}| {jogador_info}|     {linha}| {oponente_info}|\n'
     return texto
 
-# Frota do oponente
+#frota do oponente
 frota_oponente = {
     'porta-aviões': [
         [[9, 1], [9, 2], [9, 3], [9, 4]]
@@ -99,12 +97,20 @@ for navio, posicoes in frota.items():
             linha, coluna = coordenada
             tabuleiro_jogador[linha][coluna] = '1'
 
+#função questão 9, ver se tem barco do jogador
+def afundados_jogador(tabuleiro_jogador):
+    for linha in tabuleiro_jogador:
+        if '1' in linha:  
+            return False
+    return True 
+
 jogando = True
 jogadas_realizadas = []
 
 while jogando:
     print(monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente))
 
+    #jogada do jogador
     linha = int(input("Jogador, qual linha deseja atacar? "))
     while linha < 0 or linha > 9:
         print('Linha inválida!')
@@ -125,11 +131,28 @@ while jogando:
         coluna = int(input("Jogador, qual coluna deseja atacar? "))  
         while coluna < 0 or coluna > 9:
             print('Coluna inválida!')
-            coluna = int(input("Jogador, qual coluna deseja atacar? "))  
+            coluna = int(input("Jogador, qual coluna deseja atacar! "))  
 
     jogadas_realizadas.append((linha, coluna))
     tabuleiro_oponente = faz_jogada(tabuleiro_oponente, linha, coluna)
 
+    #jogador venceu
     if afundados(tabuleiro_oponente):
         print('Parabéns! Você derrubou todos os navios do seu oponente!')
         jogando = False
+        break
+
+    #jogada do oponente
+    while True:
+        linha_oponente = random.randint(0, 9)
+        coluna_oponente = random.randint(0, 9)
+        if tabuleiro_jogador[linha_oponente][coluna_oponente] not in ['X', '-']:
+            break
+
+    print(f"Seu oponente está atacando na linha {linha_oponente} e coluna {coluna_oponente}")
+    tabuleiro_jogador = faz_jogada(tabuleiro_jogador, linha_oponente, coluna_oponente)
+
+    #oponente venceu
+    if afundados_jogador(tabuleiro_jogador):
+        print('Xi! O oponente derrubou toda a sua frota =(')
+        jogando = False  
