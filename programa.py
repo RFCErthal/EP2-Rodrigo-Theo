@@ -29,7 +29,7 @@ def posicionar_frota(frota):
             coluna = int(input("Coluna: "))
 
             if nome != "submarino":
-                orientacao = int(input("[1] Vertical [2] Horizontal "))
+                orientacao = int(input("Orientação: [1] Vertical [2] Horizontal "))
                 if orientacao == 1:
                     orientacao = "vertical"
                 else:
@@ -47,7 +47,7 @@ def posicionar_frota(frota):
     return frota
 
 frota_atualizada = posicionar_frota(frota)
-print(frota_atualizada)
+# print(frota_atualizada)
 
 # pergunta 8
 
